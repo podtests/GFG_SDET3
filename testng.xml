@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="App Demo Project Automation Run">
+    <test name="Chrome Browser">
+        <groups>
+            <run>
+                <include name="Action"></include>
+            </run>
+        </groups>
+        <parameter name="browser" value="chrome"></parameter>
+        <parameter name="version" value="3435"></parameter>
+        <classes>
+            <class name="switchDemo">
+
+            </class>
+            
+
+        </classes>
+    </test>
+
+</suite>
