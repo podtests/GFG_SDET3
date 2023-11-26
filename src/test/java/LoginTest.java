@@ -7,10 +7,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import podtest.pom.HomePOM;
+import podtest.pom.ItemPOM;
 import podtest.pom.LoginPOM;
 
 import java.net.MalformedURLException;
@@ -53,7 +53,7 @@ public class LoginTest {
     @BeforeMethod(alwaysRun = true)
     public void preMethodsteps() throws MalformedURLException {
 
-        wd.get("https://demo.evershop.io/account/login");
+       // wd.get("https://demo.evershop.io/account/login");
 
         fluentWait = new FluentWait(wd)
                 .withTimeout(Duration.ofSeconds(30))
@@ -81,24 +81,36 @@ public class LoginTest {
     }
 
 
+
+    @Parameters({"Username", "Password", "ItemName"})
     @Test
-    public void loginTest2(String UN, String PW) {
+    public void loginTest2(String UN, String PW, String itemName) throws InterruptedException {
         LoginPOM login = new LoginPOM(wd);
+        HomePOM home = new HomePOM(wd);
+        ItemPOM item = new ItemPOM(wd);
 
+        login.get().fillCredentials(UN, PW).clickLogin(); //homepage
 
+        home.validatePage(fluentWait, itemName).clickItem(itemName); //itemPage
 
-        login.get();
-        login.fillCredentials(UN, PW);
-        login.clickLogin();
+        Assert.assertEquals(item.getItemName().toLowerCase(), itemName.toLowerCase());  //hard assert
 
-        login.get().fillCredentials(UN, PW).clickLogin();
+        item.fillQuantity("2").selectSize("L").selectColor("Green");
 
+        Thread.sleep(4000);
 
+        item.clickAddToCart();
 
 
 
         //
 
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDown () throws InterruptedException {
+        Thread.sleep(10000);
+        //wd.quit();
     }
 
 

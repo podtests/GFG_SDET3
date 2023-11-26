@@ -2,19 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="App Demo Project Automation Run">
     <test name="Chrome Browser">
-        <groups>
-            <run>
-                <include name="Action"></include>
-            </run>
-        </groups>
         <parameter name="browser" value="chrome"></parameter>
-        <parameter name="version" value="3435"></parameter>
+        <parameter name="Username" value="akhiljda@gmail.com"></parameter>
+        <parameter name="Password" value="Password"></parameter>
+        <parameter name="ItemName" value="Nike air zoom pegasus 35"></parameter>
         <classes>
-            <class name="switchDemo">
-
+            <class name="LoginTest">
+                <methods>
+                    <include name="loginTest2"></include>
+                </methods>
             </class>
-            
-
         </classes>
     </test>
 
