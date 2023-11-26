@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import podtest.pom.LoginPOM;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -77,6 +78,27 @@ public class LoginTest {
         wd.findElement(By.name("email")).sendKeys("Akhiljda@gmail.com");
         wd.findElement(By.name("password")).sendKeys("Pas123sword");
         wd.findElement(By.xpath("//button[@type='submit']")).click();
+    }
+
+
+    @Test
+    public void loginTest2(String UN, String PW) {
+        LoginPOM login = new LoginPOM(wd);
+
+
+
+        login.get();
+        login.fillCredentials(UN, PW);
+        login.clickLogin();
+
+        login.get().fillCredentials(UN, PW).clickLogin();
+
+
+
+
+
+        //
+
     }
 
 
